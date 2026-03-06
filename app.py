@@ -3,7 +3,6 @@
 import streamlit as st
 import os
 import tempfile
-from dotenv import load_dotenv
 
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
@@ -17,8 +16,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.runnables.history import RunnableWithMessageHistory
-
-load_dotenv()
 
 st.title("Conversational RAG with PDF Uploads and Chat History")
 st.write("Upload PDF files and chat with their content")
@@ -142,4 +139,5 @@ if "vectorstore" in st.session_state:
         with st.expander("Chat History"):
             for msg in session_history.messages:
                 role = "User" if msg.type == "human" else "Assistant"
+
                 st.write(f"**{role}:** {msg.content}")
